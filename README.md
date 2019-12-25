@@ -3,7 +3,13 @@
 
 This just takes Unity fonts and converts them to MSDF fonts using [MSDFGen](https://github.com/Chlumsky/msdfgen). At the moment this is a hack with a few hours of work and will probably be extended into a more useful thing in the future if people care enough. 
 
-This tool is made for static fonts that are baked out in the editor. It was mostly made targeted at VRChat worlds because Text Mesh Pro is fairly broken in VRChat. 
+This tool is made for static fonts that are baked out in the editor. It was mostly made targeted at VRChat worlds because Text Mesh Pro is fairly broken in VRChat. The main advantage that multi channel SDFs have is that they can maintain corners. Normal SDFs will usually get rounded corners on text. The MSDFGen github has a good example comparting to regular SDFs https://github.com/Chlumsky/msdfgen.
+
+#### Default Unity Text Rendering
+<img src="https://i.imgur.com/stcsq5M.png" width="80%" height="80%" />
+
+#### MSDF Text Rendering
+<img src="https://i.imgur.com/SgnKuqv.png" width="80%" height="80%" />
 
 ### Usage
 1. Install the package from the releases page 
