@@ -1,6 +1,8 @@
 # Unity-MSDF-Fonts
 ### Basic tool to convert Unity fonts to use Multichannel Signed Distance Field fonts
 
+Multichannel SDF font rendering provides much sharper text rendering that maintains its sharpness without pixelization no matter how large the text is. 
+
 This just takes Unity fonts and converts them to MSDF fonts using [MSDFGen](https://github.com/Chlumsky/msdfgen). At the moment this is a hack with a few hours of work and will probably be extended into a more useful thing in the future if people care enough. 
 
 This tool is made for static fonts that are baked out in the editor. It was mostly made targeted at VRChat worlds because Text Mesh Pro is fairly broken in VRChat. The main advantage that multi channel SDFs have is that they can maintain corners. Normal SDFs will usually get rounded corners on text. The MSDFGen github has a good example comparting to regular SDFs https://github.com/Chlumsky/msdfgen.
