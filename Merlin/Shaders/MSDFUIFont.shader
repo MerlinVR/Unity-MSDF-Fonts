@@ -115,8 +115,8 @@ Shader "Merlin/UI/MSDF UI Font"
 				float2 msdfUnit = _PixelRange / _MSDFTex_TexelSize.zw;
 
 				float4 sampleCol = tex2D(_MSDFTex, texcoord);
-				float sigDist = median(sampleCol.r, sampleCol.g, sampleCol.b) - 0.46;
-				sigDist *= max(dot(msdfUnit, 0.5 / fwidth(texcoord)), 0.9); // Max to handle fading out to quads in the distance
+				float sigDist = median(sampleCol.r, sampleCol.g, sampleCol.b) - 0.5;
+				sigDist *= max(dot(msdfUnit, 0.5 / fwidth(texcoord)), 1); // Max to handle fading out to quads in the distance
 				float opacity = clamp(sigDist + 0.5, 0.0, 1.0);
 				float4 color = float4(1, 1, 1, opacity);
 

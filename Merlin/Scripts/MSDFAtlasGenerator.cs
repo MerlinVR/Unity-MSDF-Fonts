@@ -36,6 +36,7 @@ public class MSDFAtlasGenerator : EditorWindow
     public Font FontToConvert = null;
 
     public Texture2D AtlasToSave = null;
+    public bool UseTextureCompression = false;
 
     private const string MSDFGenPath = "Assets/Merlin/MSDF/bin/msdfgen.exe";
     private const string MSDFTempPath = "Assets/Merlin/MSDF/gen/glyph{0}.png";
@@ -52,6 +53,13 @@ public class MSDFAtlasGenerator : EditorWindow
         EditorGUILayout.LabelField("MSDF Atlas Generator", EditorStyles.boldLabel);
 
         FontToConvert = (Font)EditorGUILayout.ObjectField("Font Asset:", FontToConvert, typeof(Font), false);
+
+        UseTextureCompression = EditorGUILayout.Toggle("Compress Font Atlas", UseTextureCompression);
+
+        if (UseTextureCompression)
+        {
+            EditorGUILayout.HelpBox("Enabling compression can cause visible artifacts on text depending on the font. On most fonts the artifacts may make the text look wobbly along edges. Check to make sure artifacts do not appear when you enable this.", MessageType.Warning);
+        }
 
         EditorGUI.BeginDisabledGroup(FontToConvert == null);
         if (GUILayout.Button("Generate Atlas"))
@@ -148,9 +156,15 @@ public class MSDFAtlasGenerator : EditorWindow
 
         }
 
-        EditorUtility.ClearProgressBar();
-
         newAtlas.Apply(false);
+        
+        if (UseTextureCompression)
+        {
+            EditorUtility.DisplayProgressBar("Generating MSDF Atlas...", "Compressing Atlas...", 1f);
+            EditorUtility.CompressTexture(newAtlas, TextureFormat.BC7, TextureCompressionQuality.Best);
+        }
+
+        EditorUtility.ClearProgressBar();
 
         string fontPath = AssetDatabase.GetAssetPath(FontToConvert);
         string savePath = Path.Combine(Path.GetDirectoryName(fontPath), Path.GetFileNameWithoutExtension(fontPath) + "_msdfAtlas.asset");
