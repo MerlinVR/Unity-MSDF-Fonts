@@ -161,7 +161,7 @@ public class MSDFAtlasGenerator : EditorWindow
         if (UseTextureCompression)
         {
             EditorUtility.DisplayProgressBar("Generating MSDF Atlas...", "Compressing Atlas...", 1f);
-            EditorUtility.CompressTexture(newAtlas, TextureFormat.BC7, TextureCompressionQuality.Best);
+            EditorUtility.CompressTexture(newAtlas, TextureFormat.BC7, UnityEditor.TextureCompressionQuality.Best);
         }
 
         EditorUtility.ClearProgressBar();
